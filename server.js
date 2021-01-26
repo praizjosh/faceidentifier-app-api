@@ -19,57 +19,46 @@ const db = knex({
   }
 });
 
-// db.select('*').from('users').then(data => {
-// 	console.log(data)
-// });
-
 const app = express();
 
-
-const database = {
-	users: [
-		{
-			id: '123',
-			name: 'Barry',
-			email: 'barry@mail.com',
-			password: 'pass',
-			entries: 0,
-			joined: new Date()
-		},
-		{
-			id: '124',
-			name: 'Earl',
-			email: 'earl@mail.com',
-			password: 'code',
-			entries: 0,
-			joined: new Date()
-		}
-	],
-	login: [
-		{
-			id: '',
-			hash: ''
-		}
-	]
-}
+// const database = {
+// 	users: [
+// 		{
+// 			id: '123',
+// 			name: 'Barry',
+// 			email: 'barry@mail.com',
+// 			password: 'pass',
+// 			entries: 0,
+// 			joined: new Date()
+// 		},
+// 		{
+// 			id: '124',
+// 			name: 'Earl',
+// 			email: 'earl@mail.com',
+// 			password: 'code',
+// 			entries: 0,
+// 			joined: new Date()
+// 		}
+// 	],
+// 	login: [
+// 		{
+// 			id: '',
+// 			hash: ''
+// 		}
+// 	]
+// }
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const allUsers = database.users;
+// const allUsers = database.users;
 
-app.get('/', (req, res) => {res.send(allUsers)})
- 
+app.get('/', (req, res) => {res.send('It is working!')})
 app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)})
-
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
-
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)})
-
 app.put('/image', (req, res) => {image.handleImage(req, res, db)})
-
 app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)})
-
 
 app.listen(process.env.PORT || 3001, () => {
 	console.log(`App is running on port ${process.env.PORT}`);
